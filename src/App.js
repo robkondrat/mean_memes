@@ -4,6 +4,7 @@ import MemeGenerator from "./components/MemeGenerator"
 import MemesIndex from "./components/MemesIndex"
 import MyMemes from "./components/MyMemes"
 import EditMeme from "./components/EditMeme"
+import Navbar from "./components/Navbar"
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import './App.css';
@@ -13,6 +14,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Header />
+        <Navbar />
         <Switch>
           <Route exact path="/" component={MemesIndex} />
           <Route exact path="/MemeGenerator" component={MemeGenerator} />
