@@ -1,4 +1,5 @@
 import React, {Component} from "react"
+import axios from "axios"
 
 class MemeGenerator extends Component {
   constructor() {
@@ -11,6 +12,7 @@ class MemeGenerator extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.saveMeme = this.saveMeme.bind(this)
   }
 
   componentDidMount() {
@@ -33,6 +35,34 @@ class MemeGenerator extends Component {
     const randMemeImg = this.state.allMemeImgs[randNum].url
     this.setState({ randomImg: randMemeImg })
     console.log(this.state.randomImg)
+  }
+
+  saveMeme() {
+    fetch("http://localhost:3001/api/memes", {
+      method: "post",
+      body: JSON.stringify({    //JSON.stringify() converts JS to string to exchange data to/from web server
+        top_text: this.state.topText,
+        bottom_text: this.state.bottomText,
+        img: this.state.randomImg
+      }),
+      headers: {
+        "Content-Type": "application/json" //content header, info about data returned (??)
+      }
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      console.log(response);
+    })
+    // axios.post(
+    //   "http://localhost:3001/api/memes",
+    //   { meme:
+    //     {
+    //       top_text: {this.state.topText},
+    //       bottom_text: {this.state.bottomText},
+    //       img: {this.state.randomImg}
+    //     }
+    //   }
+    // )
   }
 
   render() {
@@ -58,11 +88,14 @@ class MemeGenerator extends Component {
 
           <button >Generate</button>
         </form>
+
         <div className="meme">
           <img src={this.state.randomImg} alt="" />
           <h2 className="top">{this.state.topText}</h2>
           <h2 className="bottom">{this.state.bottomText}</h2>
         </div>
+
+        <button onClick={this.saveMeme}>Save Meme</button>
       </div>
     )
   }
