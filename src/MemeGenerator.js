@@ -12,6 +12,7 @@ class MemeGenerator extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.saveMeme = this.saveMeme.bind(this)
   }
 
   componentDidMount() {
@@ -37,12 +38,12 @@ class MemeGenerator extends Component {
   }
 
   saveMeme() {
-    fetch("http://localhost:3000/api/memes", {
+    fetch("http://localhost:3001/api/memes", {
       method: "post",
       body: JSON.stringify({    //JSON.stringify() converts JS to string to exchange data to/from web server
-        top_text: state.this.topText,
-        bottom_text: state.this.bottomText,
-        img: state.this.randomImg
+        top_text: this.state.topText,
+        bottom_text: this.state.bottomText,
+        img: this.state.randomImg
       }),
       headers: {
         "Content-Type": "application/json" //content header, info about data returned (??)
