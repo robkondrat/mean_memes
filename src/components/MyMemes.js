@@ -22,13 +22,16 @@ class MemesIndex extends Component {
     return (
       <div>
         <h1><a href="/MemeGenerator">Generate a Meme</a></h1>
-        <h1><a href="/MyMemes">My Memes</a></h1>
+        <h1><a href="/MemesIndex">All Memes</a></h1>
         {this.state.memes.map((meme) => {
+          // need 'if' statement here to only render user's memes
           return(
             <div className="meme" key={meme.id} >
               <img src={meme.img} alt="problem?"/>
               <h2 className="top">{meme.top_text}</h2>
               <h2 className="bottom">{meme.bottom_text}</h2>
+              <button><a href="/EditMeme">Edit This Meme</a></button>
+
             </div>
           )
         })}
